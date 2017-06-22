@@ -83,23 +83,6 @@ module.exports = {
         message: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n'
       },
       {
-        type: 'input',
-        name: 'breaking',
-        message: 'List any BREAKING CHANGES (optional):\n',
-        when: function(answers) {
-          if (config.allowBreakingChanges && config.allowBreakingChanges.indexOf(answers.type.toLowerCase()) >= 0) {
-            return true;
-          }
-          return false; // no breaking changes allowed unless specifed
-        }
-      },
-      {
-        type: 'input',
-        name: 'footer',
-        message: 'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n',
-        when: isNotWip
-      },
-      {
         type: 'expand',
         name: 'confirmCommit',
         choices: [
@@ -109,7 +92,7 @@ module.exports = {
         ],
         message: function(answers) {
           var SEP = '###--------------------------------------------------------###';
-          log.info('\n' + SEP + '\n' + buildCommit(answers) + '\n' + SEP + '\n');
+          log.info('\n' + SEP + '\n' + buildCommit(answers, config.auditors) + '\n' + SEP + '\n');
           return 'Are you sure you want to proceed with the commit above?';
         }
       }

@@ -3,16 +3,14 @@
 module.exports = {
 
   types: [
-    {value: 'feat',     name: 'feat:     A new feature'},
-    {value: 'fix',      name: 'fix:      A bug fix'},
-    {value: 'docs',     name: 'docs:     Documentation only changes'},
-    {value: 'style',    name: 'style:    Changes that do not affect the meaning of the code\n            (white-space, formatting, missing semi-colons, etc)'},
-    {value: 'refactor', name: 'refactor: A code change that neither fixes a bug nor adds a feature'},
-    {value: 'perf',     name: 'perf:     A code change that improves performance'},
-    {value: 'test',     name: 'test:     Adding missing tests'},
-    {value: 'chore',    name: 'chore:    Changes to the build process or auxiliary tools\n            and libraries such as documentation generation'},
-    {value: 'revert',   name: 'revert:   Revert to a commit'},
-    {value: 'WIP',      name: 'WIP:      Work in progress'}
+    {value: 'feat',     name: 'feat:     新功能（feature）'},
+    {value: 'fix',      name: 'fix:      修补bug (如果使用 pha 的话，在 scope 中带上 fix 的hash id)'},
+    {value: 'docs',     name: 'docs:     文档（documentation）'},
+    {value: 'style',    name: 'style:    格式（不影响代码运行的变动）\n            (white-space, formatting, missing semi-colons, etc)'},
+    {value: 'refactor', name: 'refactor: 重构（即不是新增功能，也不是修改bug的代码变动）'},
+    {value: 'test',     name: 'test:     增加测试'},
+    {value: 'chore',    name: 'chore:    构建过程或辅助工具的变动'},
+    {value: 'conflict', name: 'conflict: 解决冲突'}
   ],
 
   scopes: [
@@ -35,7 +33,7 @@ module.exports = {
   },
   */
 
-  allowCustomScopes: true,
-  allowBreakingChanges: ['feat', 'fix']
 
+  forceAuditors: true,
+  allowCustomScopes: true
 };
