@@ -3,6 +3,7 @@
 
 var buildCommit = require('./buildCommit');
 var log = require('winston');
+var colors = require('colors/safe');
 
 
 var isNotWip = function(answers) {
@@ -92,7 +93,7 @@ module.exports = {
         ],
         message: function(answers) {
           var SEP = '###--------------------------------------------------------###';
-          log.info('\n' + SEP + '\n' + buildCommit(answers, config.auditors) + '\n' + SEP + '\n');
+          console.info('\n' + SEP + '\n' + colors.green(buildCommit(answers, config.auditors)) + '\n' + SEP + '\n');
           return 'Are you sure you want to proceed with the commit above?';
         }
       }
