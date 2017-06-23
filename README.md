@@ -1,11 +1,15 @@
 # cz-ppmoney-changelog
 
+新增：根据 `git config user.name` 读取配置文件中对应的 auditors 添加到 commit message 。
+
+可以配置 `forceAuditors: {boolean, default false}` 标识是否强制要求 Auditors 。
+
 ## 初始化
 1. 安装 [Commitizen](https://github.com/commitizen/cz-cli)：`npm install -g commitizen` 
 2. 初始化 package.json ：`npm init --yes` （如果已经存在请忽略）
 3. 安装 cz-ppmoney-changelog: `npm install cz-ppmoney-changelog --save-dev`
 4. 配置 `commitizen` 使用 `cz-ppmoney-changelog` 作为 adapter。添加如下配置到 `package.json`:
-  ```
+  ```json
   ...
   "config": {
     "commitizen": {
@@ -14,7 +18,7 @@
   }
   ```
 5. 在 `package.json` 中声明配置文件:
-  ```
+  ```json
   ...
   "config": {
     "commitizen": {
@@ -26,7 +30,7 @@
   }
   ```
 6. 如果在上述配置文件中声明了强制要求 Auditors：`forceAuditors: true`，需要在 `package.json` 中声明 auditors 文件：
-```
+```json
   ...
   "config": {
     "commitizen": {
@@ -37,9 +41,12 @@
       "auditors": "path/to/my/repoAuditors.json"
     }
   }
-  ```
+```
+
+7. 此后，凡是用到`git commit`命令，一律改为使用`git cz`。
 
 ## 新增配置项
+
 forceAuditors: {boolean, default false}: 标识是否强制要求 Auditors，如果为 true，需要在 `package.json` 中声明 auditors 文件；如果没有声明，会尝试读取 `repoAuditors.json` 。auditors 文件示例：
 ```
 {
@@ -114,7 +121,7 @@ Suitable for large teams working with multiple projects with their own commit sc
     }
   }
   ```
-Note: option one allows you to have your config away from root directory. It also gives you a change to define any name to your `cz-config.js`.
+  Note: option one allows you to have your config away from root directory. It also gives you a change to define any name to your `cz-config.js`.
 
 
 **Notes:**
@@ -140,8 +147,8 @@ Here are the options you can set in your `.cz-config.js`:
       {name: 'unitTest'}
     ]
   }
-  ```
-  * allowCustomScopes: {boolean, default false}: adds the option `custom` to scope selection so you can still typea scope if you need.
+```
+* allowCustomScopes: {boolean, default false}: adds the option `custom` to scope selection so you can still typea scope if you need.
   * allowBreakingChanges: {Array of Strings: default none}. List of commit types you would like to the question `breaking change` prompted. Eg.: ['feat', 'fix']
   * appendBranchNameToCommitMessage: If you use `cz-customizable` with `cz-customizable-ghooks`, you can get the branch name automatically appended to the commit message. This is done by a commit hook on `cz-customizable-ghooks`. This option has been added on `cz-customizable-ghooks`, v1.3.0. Default value is `true`.
 
@@ -156,12 +163,12 @@ Here are the options you can set in your `.cz-config.js`:
 ## GOTCHAS
 
 * backticks
-If you wish to have backticks in your content, for example "feat: \`string\`", the commit preview will be "feat: \\\\`string\\\\`".
-Don't worry because on your `git log` will be "feat: \`string\`" as desired.
+  If you wish to have backticks in your content, for example "feat: \`string\`", the commit preview will be "feat: \\\\`string\\\\`".
+  Don't worry because on your `git log` will be "feat: \`string\`" as desired.
 
 * multiline contents on the body of the message
-Body is the only place where you can use a `pipe` to break lines.
-E.g.: you type this: `my items are:| - item01| - item 02`, which will become:
+  Body is the only place where you can use a `pipe` to break lines.
+  E.g.: you type this: `my items are:| - item01| - item 02`, which will become:
 
 
 ```
